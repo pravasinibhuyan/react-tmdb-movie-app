@@ -1,0 +1,11 @@
+.homeHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.homeHeader .trending {
+  font-size: 20px;
+  color: rgb(193, 197, 200);
+}

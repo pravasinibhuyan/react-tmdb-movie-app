@@ -1,0 +1,17 @@
+.paginationBox {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.paginationArrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}

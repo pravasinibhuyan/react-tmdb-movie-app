@@ -1,0 +1,23 @@
+.header {
+  background-color: rgb(23, 22, 22);
+  color: #f2aa4cff;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgb(3, 2, 23) 0%,
+    rgb(46, 46, 46) 35%,
+    rgb(71, 72, 72) 100%
+  );
+  box-shadow: rgba(176, 170, 170, 0.24) 0px 0px 5px;
+  padding: 10px 50px;
+}
+.header h1 {
+  font-size: 20px;
+}
+.header h2 {
+  margin: 18px 80px 0;
+  font-size: 18px;
+}

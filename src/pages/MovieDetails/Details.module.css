@@ -1,0 +1,19 @@
+.details {
+  padding: 50px;
+}
+.details_box img {
+  width: 400px;
+  max-height: 500px;
+}
+.details_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.details_box p {
+  margin: 0;
+  line-height: 1.8;
+  color: rgb(162, 163, 164);
+}
