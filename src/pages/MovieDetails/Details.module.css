@@ -1,10 +1,10 @@
 .details {
-  width: 60%;
+  width: 80%;
   margin: 0px auto;
   color: black;
 }
 .details_box img {
-  width: 500px;
+  max-width: 500px;
   max-height: 500px;
   object-fit: fill;
 }
@@ -13,14 +13,16 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: white;
   gap: 30px;
   padding: 50px;
-  margin: 50px;
+  margin-top: 120px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 .details_box p {
   margin: 0;
-  line-height: 1.8;
+  line-height: 2.8;
   color: rgb(88, 90, 92);
 }
 .details_box span {

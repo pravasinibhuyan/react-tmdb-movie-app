@@ -1,11 +1,11 @@
 import CommonLayout from "../layout/CommonLayout";
 import HomePage from "../pages/Home/Home";
 
-const Container = () => {
+const HomeContainer = () => {
   return (
     <CommonLayout>
       <HomePage />
     </CommonLayout>
   );
 };
-export default Container;
+export default HomeContainer;

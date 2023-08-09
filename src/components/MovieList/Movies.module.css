@@ -1,17 +1,10 @@
 .movie_card {
-  width: 250px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
-  color: white;
-  border: 5px solid rgb(147, 141, 141);
-  border-radius: 10px;
-  padding: 10px;
   height: 400px;
   min-height: 400px;
-  margin: 50px;
   transition: transform 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 .movie_card img {
   width: 220px;
@@ -21,30 +14,4 @@
 }
 .movie_card:hover {
   transform: scale(1.05);
-}
-.movie_card h2 {
-  text-transform: capitalize;
-  font-size: 18px;
-  color: rgb(219, 221, 225);
-}
-.movieName {
-  width: 100%;
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.movieName p {
-  margin: 5px;
-  color: rgb(196, 198, 203);
-}
-.movie_card .card_content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-}
-.real_data {
-  color: rgb(195, 197, 200);
 }

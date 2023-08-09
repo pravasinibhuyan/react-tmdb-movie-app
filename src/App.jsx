@@ -1,39 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Container from "./container/HomeContainer";
-import Details from "./pages/MovieDetails/Details";
-import SearchResult from "./pages/SearchMovie/SearchResult";
-import CommonLayout from "./layout/CommonLayout";
+
+import HomeContainer from "./container/HomeContainer";
+import MovieDetailsContainer from "./container/MovieDetailsContainer";
+import SearchedContainer from "./container/SearchedContainer";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Container />} />
-        <Route
-          path="/:id"
-          element={
-            <CommonLayout>
-              <Details />
-            </CommonLayout>
-          }
-        />
-        <Route
-          path="/search-movies"
-          element={
-            <CommonLayout>
-              <SearchResult />
-            </CommonLayout>
-          }
-        />
-        <Route
-          path="/search-movies/:id"
-          element={
-            <CommonLayout>
-              <Details />
-            </CommonLayout>
-          }
-        />
+        <Route path="/" element={<HomeContainer />} />
+        <Route path="/:id" element={<MovieDetailsContainer />} />
+        <Route path="/search-movies" element={<SearchedContainer />} />
+        <Route path="/search-movies/:id" element={<MovieDetailsContainer />} />
       </Routes>
     </>
   );

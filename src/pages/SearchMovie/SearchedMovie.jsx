@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { GET_SEARCH_MOVIES } from "../../constant/queryKey";
 import { useEffect, useMemo, useState } from "react";
-import Movies from "../../components/MovieList/Movies";
 import style from "./SearchResult.module.css";
 import { getSearchMovies } from "../../services/searchMovies.services";
-import { Spin } from "antd";
+import { Col, Row, Spin } from "antd";
 import { useLocation } from "react-router-dom";
 import CardPagination from "../../components/CardPagination/Pagination";
+import Movie from "../../components/MovieList/MovieCard";
 
-const SearchResult = () => {
+const SearchedMovie = () => {
   const [pageCount, setPageCount] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
@@ -50,18 +50,30 @@ const SearchResult = () => {
           </div>
         ) : movieData?.results?.length ? (
           <>
-            <Movies movieData={movieData} />
+            <Row gutter={[20, 50]}>
+              {movieData?.results?.map((item) => (
+                <Col key={item.id} span={4}>
+                  <Movie item={item} />
+                </Col>
+              ))}
+            </Row>
             <CardPagination
               pageCount={pageCount}
               setCurrentPage={setCurrentPage}
             />
           </>
         ) : (
-          <p>Data Not Found..........</p>
+          <div className={style.noDataFountdiv}>
+            <img
+              src="https://www.shutterstock.com/image-vector/image-not-found-grayscale-photo-260nw-1737334631.jpg"
+              alt="pic"
+            />
+            <p className={style.noDataFountPara}>No data found</p>
+          </div>
         )}
       </div>
     </div>
   );
 };
 
-export default SearchResult;
+export default SearchedMovie;
