@@ -1,57 +1,65 @@
 import { useQuery } from "@tanstack/react-query";
 import { GET_SEARCH_MOVIES } from "../../constant/queryKey";
-import { useMemo, useState } from "react";
-import Pagination from "../../components/CardPagination/Pagination";
+import { useEffect, useMemo, useState } from "react";
 import Movies from "../../components/MovieList/Movies";
 import style from "./SearchResult.module.css";
 import { getSearchMovies } from "../../services/searchMovies.services";
 import { Spin } from "antd";
 import { useLocation } from "react-router-dom";
+import CardPagination from "../../components/CardPagination/Pagination";
 
 const SearchResult = () => {
-  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const location = useLocation();
 
   //========================== Define UseQuery ========================//
-  const limit = 8;
-  const { data, isLoading, isPreviousData } = useQuery(
-    [GET_SEARCH_MOVIES, location.state.result, page],
-    () => getSearchMovies(location.state.result, page, limit),
+
+  const { data, isLoading } = useQuery(
+    [GET_SEARCH_MOVIES, location.state.result, currentPage],
+    () => getSearchMovies(location.state.result, currentPage),
     {
       keepPreviousData: true,
+      refetchOnWindowFocus: false,
     }
   );
 
   //========================== Memorized Api Data ========================//
-  const moviesData = useMemo(() => {
+  const movieData = useMemo(() => {
     if (!data) {
       return null;
     }
     return data.data;
   }, [data]);
 
+  useEffect(() => {
+    if (data) {
+      setPageCount(data && data.data.total_pages);
+    }
+  }, [data]);
+
   return (
     <div className={style.search_result_div}>
-      <h2
-        className={style.search_result}
-      >{`Search Result For  '${location.state.result}'`}</h2>
-      {isLoading ? (
-        <div className="example">
-          <Spin />
-        </div>
-      ) : moviesData?.results?.length ? (
-        <>
-          <Movies moviesData={moviesData} />
-          <Pagination
-            page={page}
-            setPage={setPage}
-            isPreviousData={isPreviousData}
-            moviesData={moviesData}
-          />
-        </>
-      ) : (
-        <p>Data Not Found..........</p>
-      )}
+      <div className={style.searchCard}>
+        <h2
+          className={style.search_result}
+        >{`Search Result For  '${location.state.result}'`}</h2>
+        {isLoading ? (
+          <div className="example">
+            <Spin />
+          </div>
+        ) : movieData?.results?.length ? (
+          <>
+            <Movies movieData={movieData} />
+            <CardPagination
+              pageCount={pageCount}
+              setCurrentPage={setCurrentPage}
+            />
+          </>
+        ) : (
+          <p>Data Not Found..........</p>
+        )}
+      </div>
     </div>
   );
 };

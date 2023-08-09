@@ -8,8 +8,10 @@ const SearchInput = ({ setSearchMovie }) => {
   return (
     <div className={style.searchBar}>
       <Search
-        placeholder="search here..."
+        placeholder="input search text"
         allowClear
+        enterButton="Search"
+        size="large"
         className={style.searching}
         onSearch={onSearch}
       />

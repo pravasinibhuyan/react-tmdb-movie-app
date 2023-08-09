@@ -1,4 +1,7 @@
 .header {
+  width: 100%;
+  z-index: 9999;
+  position: fixed;
   background-color: rgb(23, 22, 22);
   color: #f2aa4cff;
   display: flex;
@@ -7,7 +10,7 @@
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
-    rgb(3, 2, 23) 0%,
+    rgb(49, 44, 33) 0%,
     rgb(46, 46, 46) 35%,
     rgb(71, 72, 72) 100%
   );
@@ -16,8 +19,20 @@
 }
 .header h1 {
   font-size: 20px;
+  cursor: pointer;
 }
 .header h2 {
-  margin: 18px 80px 0;
+  margin: 0px 80px 0;
   font-size: 18px;
+  cursor: pointer;
+}
+.right_menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sort {
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
 }
