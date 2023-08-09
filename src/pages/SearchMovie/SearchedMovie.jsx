@@ -4,20 +4,20 @@ import { useEffect, useMemo, useState } from "react";
 import style from "./SearchResult.module.css";
 import { getSearchMovies } from "../../services/searchMovies.services";
 import { Col, Row, Spin } from "antd";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import CardPagination from "../../components/CardPagination/Pagination";
 import Movie from "../../components/MovieList/MovieCard";
 
 const SearchedMovie = () => {
-  const [pageCount, setPageCount] = useState();
+  const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   //========================== Define UseQuery ========================//
 
   const { data, isLoading } = useQuery(
-    [GET_SEARCH_MOVIES, location.state.result, currentPage],
-    () => getSearchMovies(location.state.result, currentPage),
+    [GET_SEARCH_MOVIES, searchParams.get("name"), currentPage],
+    () => getSearchMovies(searchParams.get("name"), currentPage),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -34,16 +34,20 @@ const SearchedMovie = () => {
 
   useEffect(() => {
     if (data) {
-      setPageCount(data && data.data.total_pages);
+      setPageCount(data && data.data.total_results);
     }
   }, [data]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [currentPage]);
 
   return (
     <div className={style.search_result_div}>
       <div className={style.searchCard}>
         <h2
           className={style.search_result}
-        >{`Search Result For  '${location.state.result}'`}</h2>
+        >{`Search Result For  '${searchParams.get("name")}'`}</h2>
         {isLoading ? (
           <div className="example">
             <Spin />

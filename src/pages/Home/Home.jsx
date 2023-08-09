@@ -10,7 +10,7 @@ import CardPagination from "../../components/CardPagination/Pagination";
 import Movie from "../../components/MovieList/MovieCard";
 
 const HomePage = () => {
-  const [pageCount, setPageCount] = useState();
+  const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchedMovie, setSearchedMovie] = useState();
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const HomePage = () => {
   //======================== Set page Count from api data ==================//
   useEffect(() => {
     if (data) {
-      setPageCount(data && data.data.total_pages);
+      setPageCount(data && data.data.total_results);
     }
   }, [data]);
 
@@ -49,8 +49,12 @@ const HomePage = () => {
   //======================= Navigate to Search Page ====================//
 
   if (searchedMovie) {
-    navigate("/search-movies", { state: { result: searchedMovie } });
+    navigate({
+      pathname: "/searched-movie",
+      search: `?name=${searchedMovie}&page=${currentPage}`,
+    });
   }
+
   return (
     <div className={style.homeHeader}>
       <div className={style.searchdiv}>

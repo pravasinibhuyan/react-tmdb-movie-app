@@ -1,18 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import style from "./Header.module.css";
-import { EllipsisOutlined } from "@ant-design/icons";
 
 const CommonHeader = () => {
   const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+  };
   return (
     <>
       <div className={style.header}>
-        <h1>THE MOVIE HUB</h1>
+        <h1 onClick={handleClick}>THE MOVIE HUB</h1>
         <div className={style.right_menu}>
-          <h2 onClick={() => navigate("/")}>Home</h2>
-          <span className={style.sort}>
-            <EllipsisOutlined />
-          </span>
+          <h2 onClick={handleClick}>Home</h2>
         </div>
       </div>
     </>
