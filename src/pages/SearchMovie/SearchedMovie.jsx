@@ -56,7 +56,15 @@ const SearchedMovie = () => {
           <>
             <Row gutter={[20, 50]}>
               {movieData?.results?.map((item) => (
-                <Col key={item.id} span={4}>
+                <Col
+                  key={item.id}
+                  xxl={{ span: 4, offset: 0 }}
+                  xl={{ span: 4, offset: 0 }}
+                  lg={{ span: 6, offset: 0 }}
+                  md={{ span: 8, offset: 0 }}
+                  sm={{ span: 12, offset: 12 }}
+                  xs={{ span: 24, offset: 12 }}
+                >
                   <Movie item={item} />
                 </Col>
               ))}

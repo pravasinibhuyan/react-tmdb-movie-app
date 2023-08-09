@@ -6,6 +6,7 @@
   padding: 20px;
 }
 .homeHeader .trending {
+  text-align: center;
   font-size: 25px;
   color: rgb(193, 197, 200);
 }
