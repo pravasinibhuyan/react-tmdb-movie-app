@@ -10,7 +10,6 @@
 }
 .details_box {
   display: flex;
-  justify-content: space-around;
   align-items: center;
   border-radius: 5px;
   background-color: white;
@@ -40,4 +39,10 @@
 }
 .details_card_content .description {
   text-align: left;
+}
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
 }

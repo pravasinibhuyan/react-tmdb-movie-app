@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import style from "./Details.module.css";
 import { useMemo } from "react";
 import { IMAGE_URL } from "../../services/apiConfig";
-import { Col, Row, Spin } from "antd";
+import { Col, Row, Skeleton, Spin } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieDetails } from "../../services/movieDetails.services";
 import { MOVIE_DETAILS } from "../../constant/queryKey";
@@ -30,8 +30,8 @@ const Details = () => {
       <Row justify="center">
         <Col span={24}>
           {isLoading ? (
-            <div className="example">
-              <Spin />
+            <div className={style.loader}>
+              <Skeleton />
             </div>
           ) : (
             <div className={style.details_box}>
