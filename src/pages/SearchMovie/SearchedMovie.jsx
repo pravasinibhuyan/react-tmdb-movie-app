@@ -1,23 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { GET_SEARCH_MOVIES } from "../../constant/queryKey";
+import { GET_SEARCH_MOVIE } from "../../constant/queryKey";
 import { useEffect, useMemo, useState } from "react";
 import style from "./SearchResult.module.css";
-import { getSearchMovies } from "../../services/searchMovies.services";
+import { getSearchMovie } from "../../services/searchMovie.services";
 import { Col, Row, Spin } from "antd";
 import { useSearchParams } from "react-router-dom";
 import CardPagination from "../../components/CardPagination/Pagination";
 import Movie from "../../components/MovieList/MovieCard";
 
 const SearchedMovie = () => {
-  const [pageCount, setPageCount] = useState(1);
+  const [totalElements, setTotalElements] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchParams] = useSearchParams();
 
   //========================== Define UseQuery ========================//
 
   const { data, isLoading } = useQuery(
-    [GET_SEARCH_MOVIES, searchParams.get("name"), currentPage],
-    () => getSearchMovies(searchParams.get("name"), currentPage),
+    [GET_SEARCH_MOVIE, searchParams.get("page")],
+    () => getSearchMovie(searchParams.get("name"), searchParams.get("page")),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -25,6 +25,7 @@ const SearchedMovie = () => {
   );
 
   //========================== Memorized Api Data ========================//
+
   const movieData = useMemo(() => {
     if (!data) {
       return null;
@@ -34,13 +35,13 @@ const SearchedMovie = () => {
 
   useEffect(() => {
     if (data) {
-      setPageCount(data && data.data.total_results);
+      setTotalElements(data && data.data.total_results);
     }
   }, [data]);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-  }, [currentPage]);
+  }, [searchParams]);
 
   return (
     <div className={style.search_result_div}>
@@ -70,8 +71,9 @@ const SearchedMovie = () => {
               ))}
             </Row>
             <CardPagination
-              pageCount={pageCount}
-              setCurrentPage={setCurrentPage}
+              totalElements={totalElements}
+              params={`name=${searchParams.get("name")}&page`}
+              pathname={"/searched-movie"}
             />
           </>
         ) : (

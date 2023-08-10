@@ -1,25 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import style from "./Home.module.css";
-import { GET_SEARCH_MOVIES } from "../../constant/queryKey";
+import { GET_ALL_MOVIE } from "../../constant/queryKey";
 import { useEffect, useMemo, useState } from "react";
 import SearchInput from "../../components/SearchBar/SearchInput";
 import { Col, Row, Spin } from "antd";
-import { useNavigate } from "react-router-dom";
-import { getAllMovies } from "../../services/movies.services";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { getAllMovie } from "../../services/movie.services";
 import CardPagination from "../../components/CardPagination/Pagination";
 import Movie from "../../components/MovieList/MovieCard";
 
 const HomePage = () => {
-  const [pageCount, setPageCount] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [totalElements, setTotalElements] = useState();
   const [searchedMovie, setSearchedMovie] = useState();
   const navigate = useNavigate();
+  let [searchParams] = useSearchParams();
 
   //========================== Define UseQuery ========================//
 
   const { data, isLoading } = useQuery(
-    [GET_SEARCH_MOVIES, currentPage],
-    () => getAllMovies(currentPage),
+    [GET_ALL_MOVIE, searchParams.get("page")],
+    () => getAllMovie(searchParams.get("page") || 1),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
@@ -37,21 +37,21 @@ const HomePage = () => {
   //======================== Set page Count from api data ==================//
   useEffect(() => {
     if (data) {
-      setPageCount(data && data.data.total_results);
+      setTotalElements(data && data.data.total_results);
     }
   }, [data]);
 
   //=====================Scroll to top on pagination =================//
   useEffect(() => {
     window.scrollTo({ top: 0 });
-  }, [currentPage]);
+  }, [searchParams]);
 
   //======================= Navigate to Search Page ====================//
 
   if (searchedMovie) {
     navigate({
       pathname: "/searched-movie",
-      search: `?name=${searchedMovie}&page=${currentPage}`,
+      search: `?name=${searchedMovie}&page=${1}`,
     });
   }
 
@@ -83,8 +83,9 @@ const HomePage = () => {
             ))}
           </Row>
           <CardPagination
-            pageCount={pageCount}
-            setCurrentPage={setCurrentPage}
+            totalElements={totalElements}
+            pathname={"./"}
+            params="?page"
           />
         </>
       ) : (

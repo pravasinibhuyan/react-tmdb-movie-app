@@ -1,3 +1,3 @@
-export const GET_SEARCH_MOVIES = "getSearchMovies";
-export const GET_ALL_MOVIES = "getAllMovies";
+export const GET_SEARCH_MOVIE = "getSearchMovie";
+export const GET_ALL_MOVIE = "getAllMovie";
 export const MOVIE_DETAILS = `getMovieDetails`;
