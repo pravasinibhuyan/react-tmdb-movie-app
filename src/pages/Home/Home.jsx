@@ -82,6 +82,7 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
+
           <CardPagination
             totalElements={totalElements}
             pathname={"./"}

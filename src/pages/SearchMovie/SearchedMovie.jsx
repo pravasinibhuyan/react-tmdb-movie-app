@@ -10,7 +10,6 @@ import Movie from "../../components/MovieList/MovieCard";
 
 const SearchedMovie = () => {
   const [totalElements, setTotalElements] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchParams] = useSearchParams();
 
   //========================== Define UseQuery ========================//

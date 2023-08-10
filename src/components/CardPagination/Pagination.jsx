@@ -12,7 +12,7 @@ const CardPagination = ({ totalElements, pathname, params }) => {
         showSizeChanger={false}
         pageSize={20}
         current={searchParams.get("page")}
-        responsive={true}
+        responsive={false}
         onChange={(item) => {
           navigate({
             pathname: pathname,
