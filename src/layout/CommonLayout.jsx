@@ -1,3 +1,4 @@
+import Footer from "../components/Footer/Footer";
 import CommonHeader from "../components/Header/Header";
 import PropTypes from "prop-types";
 
@@ -10,6 +11,7 @@ export default function CommonLayout({ children }) {
     <>
       <CommonHeader />
       {children}
+      <Footer />
     </>
   );
 }

@@ -10,3 +10,7 @@
   font-size: 25px;
   color: rgb(193, 197, 200);
 }
+.loader-gif {
+  width: 150px;
+  height: 150px;
+}

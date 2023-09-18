@@ -8,6 +8,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { getAllMovie } from "../../services/movie.services";
 import CardPagination from "../../components/CardPagination/Pagination";
 import Movie from "../../components/MovieList/MovieCard";
+import SlidingCard from "../../components/Sliding-card/SlidingCard";
+import Slider from "react-slick";
 
 const HomePage = () => {
   const [totalElements, setTotalElements] = useState();
@@ -17,14 +19,7 @@ const HomePage = () => {
 
   //========================== Define UseQuery ========================//
 
-  const { data, isLoading } = useQuery(
-    [GET_ALL_MOVIE, searchParams.get("page")],
-    () => getAllMovie(searchParams.get("page") || 1),
-    {
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data, isLoading } = useQuery([GET_ALL_MOVIE], () => getAllMovie());
 
   //========================== Memorized Api Data ========================//
   const movieData = useMemo(() => {
@@ -34,17 +29,7 @@ const HomePage = () => {
     return data.data;
   }, [data]);
 
-  //======================== Set page Count from api data ==================//
-  useEffect(() => {
-    if (data) {
-      setTotalElements(data && data.data.total_results);
-    }
-  }, [data]);
-
-  //=====================Scroll to top on pagination =================//
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, [searchParams]);
+  console.log(movieData);
 
   //======================= Navigate to Search Page ====================//
 
@@ -60,13 +45,19 @@ const HomePage = () => {
       <div className={style.searchdiv}>
         <SearchInput setSearchMovie={setSearchedMovie} />
       </div>
-      {isLoading ? (
-        <div className="example">
-          <Spin />
+      {/* {isLoading ? (
+        <div className="loader-gif">
+          <img
+            src="https://film-match.netlify.app/images/1961-movie-loading.gif"
+            alt="loading"
+            width={100}
+            height={100}
+          />
         </div>
       ) : movieData?.results?.length ? (
         <>
-          <h2 className={style.trending}>On trending ...</h2>
+          <h2 className={style.trending}>Trending</h2>
+
           <Row gutter={[20, 50]}>
             {movieData?.results?.map((item) => (
               <Col
@@ -82,16 +73,14 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
-
-          <CardPagination
-            totalElements={totalElements}
-            pathname={"./"}
-            params="?page"
-          />
         </>
       ) : (
         <p>Data Not Found..........</p>
-      )}
+      )} */}
+      {/* <SlidingCard data={movieData} title="Trending" /> */}
+      <Slider dots={true}>
+        <div>dadadad</div>
+      </Slider>
     </div>
   );
 };

@@ -6,8 +6,9 @@
   margin-top: 50px;
 }
 .searching {
-  width: 1000px;
-  padding: 10px;
+  width: 800px;
+  padding: 5px;
+  border-radius: 30px;
 }
 .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
   border-start-start-radius: 33px;

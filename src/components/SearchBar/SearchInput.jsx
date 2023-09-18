@@ -11,12 +11,13 @@ const SearchInput = ({ setSearchMovie }) => {
       <Row>
         <Col span={18}>
           <Search
-            placeholder="input search text"
+            placeholder="Search movie"
             allowClear
             enterButton="Search"
             size="large"
             className={style.searching}
             onSearch={onSearch}
+            style={{ color: "red" }}
           />
         </Col>
       </Row>
